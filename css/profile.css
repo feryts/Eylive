@@ -1,0 +1,87 @@
+/* ==========================================
+        EY LIVE PROFILE STYLE v1.0
+========================================== */
+
+.profilePage{
+min-height:100vh;
+background:linear-gradient(180deg,#12001f,#22003d,#330066);
+color:#fff;
+font-family:Poppins,sans-serif;
+padding-bottom:90px;
+}
+
+.profileHeader{
+text-align:center;
+padding:40px 20px;
+}
+
+.avatar{
+width:120px;
+height:120px;
+border-radius:50%;
+border:5px solid #8a2eff;
+box-shadow:0 0 35px rgba(138,46,255,.6);
+}
+
+.profileHeader h2{
+margin-top:15px;
+font-size:26px;
+}
+
+.profileHeader p{
+opacity:.7;
+margin-top:5px;
+}
+
+.vip{
+display:inline-block;
+margin-top:15px;
+padding:10px 22px;
+border-radius:25px;
+background:linear-gradient(135deg,#ffb300,#ff6600);
+font-weight:bold;
+}
+
+.wallet{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+padding:20px;
+}
+
+.box{
+background:rgba(255,255,255,.08);
+border-radius:22px;
+padding:20px;
+text-align:center;
+backdrop-filter:blur(20px);
+}
+
+.box h3{
+margin-top:10px;
+font-size:22px;
+}
+
+.box p{
+margin-top:5px;
+opacity:.7;
+}
+
+.menu{
+padding:20px;
+}
+
+.item{
+background:rgba(255,255,255,.08);
+padding:18px;
+border-radius:18px;
+margin-bottom:15px;
+font-size:17px;
+transition:.3s;
+cursor:pointer;
+}
+
+.item:hover{
+background:rgba(255,255,255,.15);
+transform:translateX(6px);
+}
