@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Profil - EY LIVE</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/profile.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="page fadeIn">
+
+<div class="profileHeader">
+
+<img id="avatar" src="../assets/avatar/default.png" class="avatar">
+
+<h2 id="username">Misafir</h2>
+
+<p id="userid">ID : EY000001</p>
+
+</div>
+
+<div class="glass balance">
+
+<div>
+
+<h3>Coin</h3>
+
+<h1 id="coin">0</h1>
+
+</div>
+
+<div>
+
+<h3>Diamond</h3>
+
+<h1 id="diamond">0</h1>
+
+</div>
+
+</div>
+
+<div class="glass menu">
+
+<a href="wallet.html">💰 Cüzdan</a>
+
+<a href="room.html">🎙 Odalar</a>
+
+<a href="games.html">🎮 Oyunlar</a>
+
+<a href="chat.html">💬 Mesajlar</a>
+
+</div>
+
+<button class="btnPrimary" id="logoutBtn">
+
+Çıkış Yap
+
+</button>
+
+</div>
+
+<nav class="bottomNav">
+
+<a href="index.html">
+
+🏠
+
+<span>Ana</span>
+
+</a>
+
+<a href="room.html">
+
+🎙
+
+<span>Odalar</span>
+
+</a>
+
+<a href="games.html">
+
+🎮
+
+<span>Oyun</span>
+
+</a>
+
+<a href="chat.html">
+
+💬
+
+<span>Mesaj</span>
+
+</a>
+
+<a class="active">
+
+👤
+
+<span>Profil</span>
+
+</a>
+
+</nav>
+
+<script>
+
+const user=JSON.parse(localStorage.getItem("eylive_user"));
+
+if(user){
+
+document.getElementById("username").innerHTML=user.username||"Misafir";
+
+document.getElementById("coin").innerHTML=user.coin;
+
+document.getElementById("diamond").innerHTML=user.diamond;
+
+if(user.avatar){
+
+document.getElementById("avatar").src=user.avatar;
+
+}
+
+}
+
+document.getElementById("logoutBtn").onclick=()=>{
+
+localStorage.removeItem("eylive_user");
+
+location.href="../index.html";
+
+};
+
+</script>
+
+</body>
+
+</html>
