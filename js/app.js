@@ -1,19 +1,16 @@
 /* ===========================================
-   EY LIVE V2 CORE
-   app.js
+   EY LIVE CORE
 =========================================== */
 
 const APP = {
     name: "EY LIVE",
     version: "2.0.0",
-    build: "002",
-    theme: "dark",
-    online: true
+    build: "003"
 };
 
 const DEFAULT_USER = {
     id: "",
-    username: "",
+    username: "Misafir",
     avatar: "assets/avatar/default.png",
     coin: 0,
     diamond: 0,
@@ -35,73 +32,25 @@ class EyLive {
     init() {
         console.log(APP.name, APP.version, APP.build);
 
-        this.install();
         this.network();
         this.theme();
+        this.install();
         this.loader();
     }
 
     loader() {
 
-        const bar = document.querySelector(".bar");
-
-        if (!bar) return;
-
         setTimeout(() => {
 
-            const nextPage = "./pages/index.html";
-            fetch(nextPage)
-                .then(res => {
+            const splash = document.getElementById("splash");
+            const login = document.getElementById("loginPage");
 
-                    if (res.ok) {
+            if (splash && login) {
 
-                        window.location.replace(nextPage);
+                splash.style.display = "none";
+                login.style.display = "block";
 
-                    } else {
-
-                        document.body.innerHTML = `
-                            <div style="
-                                background:#12061f;
-                                color:#fff;
-                                height:100vh;
-                                display:flex;
-                                justify-content:center;
-                                align-items:center;
-                                flex-direction:column;
-                                font-family:Poppins,sans-serif;
-                                text-align:center;
-                                padding:20px;
-                            ">
-                                <h2>Sayfa bulunamadı</h2>
-                                <p>${nextPage}</p>
-                                <p>Status : ${res.status}</p>
-                            </div>
-                        `;
-
-                    }
-
-                })
-                .catch(err => {
-
-                    document.body.innerHTML = `
-                        <div style="
-                            background:#12061f;
-                            color:#fff;
-                            height:100vh;
-                            display:flex;
-                            justify-content:center;
-                            align-items:center;
-                            flex-direction:column;
-                            font-family:Poppins,sans-serif;
-                            text-align:center;
-                            padding:20px;
-                        ">
-                            <h2>Yükleme Hatası</h2>
-                            <p>${err}</p>
-                        </div>
-                    `;
-
-                });
+            }
 
         }, 2200);
 
@@ -111,9 +60,7 @@ class EyLive {
 
         const data = localStorage.getItem("eylive_user");
 
-        if (data) {
-            return JSON.parse(data);
-        }
+        if (data) return JSON.parse(data);
 
         localStorage.setItem(
             "eylive_user",
@@ -121,15 +68,6 @@ class EyLive {
         );
 
         return DEFAULT_USER;
-
-    }
-
-    saveUser() {
-
-        localStorage.setItem(
-            "eylive_user",
-            JSON.stringify(this.user)
-        );
 
     }
 
@@ -162,6 +100,19 @@ class EyLive {
 
 }
 
-const ey = new EyLive();
+window.ey = new EyLive();
 
-window.ey = ey;
+document.addEventListener("DOMContentLoaded", () => {
+
+    const loginBtn = document.querySelector(".loginBtn");
+    const guestBtn = document.querySelector(".guestBtn");
+
+    function enterApp() {
+        window.location.href = "pages/index.html";
+    }
+
+    if (loginBtn) loginBtn.onclick = enterApp;
+
+    if (guestBtn) guestBtn.onclick = enterApp;
+
+});
