@@ -2,15 +2,15 @@
 <html lang="tr">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>EY LIVE - Voice Room</title>
+<title>EY LIVE V2 | Voice Room</title>
 
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/room.css">
+<link rel="stylesheet" href="../css/gift.css">
+<link rel="stylesheet" href="../css/profile.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -18,215 +18,140 @@
 
 <body>
 
-<div class="roomPage">
+<div class="roomPage fadeIn">
 
 <header class="roomHeader">
 
-<div class="backButton">
+<button id="backBtn" class="iconBtn">
 
 ←
 
-</div>
+</button>
 
-<div class="roomCenter">
+<div class="roomInfo">
 
-<h2>🎙 Türkiye Sohbet</h2>
+<h2 id="roomTitle">
+
+Türkiye Lounge
+
+</h2>
 
 <p>
 
-ID : 100245
+<span id="roomId">
+
+ID 1001
+
+</span>
 
 •
 
+<span id="onlineCount">
+
 245 Online
+
+</span>
 
 </p>
 
 </div>
 
-<div class="roomMenu">
+<button class="iconBtn">
 
-⚙
+⚙️
 
-</div>
+</button>
 
 </header>
 
-<section class="roomBanner">
+<section class="hostSection">
 
-<div class="bannerLeft">
+<div class="hostAvatar speaking">
 
-<img src="https://i.pravatar.cc/200?img=12">
+<img src="../assets/avatar/default.png" alt="Host">
 
-<div>
+<div class="hostRing"></div>
 
-<h3>EyLive Official</h3>
+</div>
+
+<h3>
+
+👑 EyLive
+
+</h3>
 
 <p>
 
-👑 Host
+Host
 
 </p>
 
-</div>
+</section>
+
+<section class="micGrid">
+
+<div class="micSeat occupied">
+
+<img src="../assets/avatar/default.png">
+
+<span>EyLive</span>
 
 </div>
 
-<div class="bannerRight">
+<div class="micSeat occupied">
 
-🪙 125000
+<img src="../assets/avatar/default.png">
+
+<span>Ahmet</span>
 
 </div>
+
+<div class="micSeat occupied">
+
+<img src="../assets/avatar/default.png">
+
+<span>Ayşe</span>
+
+</div>
+
+<div class="micSeat occupied">
+
+<img src="../assets/avatar/default.png">
+
+<span>Can</span>
+
+</div>
+
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
+<div class="micSeat empty">+</div>
 
 </section>
 
-<section class="seatContainer">
+<section class="chatBox">
 
-<div class="seat owner">
+<div id="chatList">
 
-<img src="https://i.pravatar.cc/150?img=12">
+<div class="chatItem">
 
-<div class="mic">
+<b>Sistem</b>
 
-🎤
-
-</div>
-
-<span>
-
-EyLive
-
-</span>
+🎉 Odaya hoş geldiniz.
 
 </div>
-
-<div class="seat">
-
-<img src="https://i.pravatar.cc/150?img=22">
-
-<div class="mic">
-
-🎤
-
-</div>
-
-<span>
-
-Ahmet
-
-</span>
-
-</div>
-
-<div class="seat">
-
-<img src="https://i.pravatar.cc/150?img=24">
-
-<div class="mic">
-
-🎤
-
-</div>
-
-<span>
-
-Ayşe
-
-</span>
-
-</div>
-
-<div class="seat">
-
-<img src="https://i.pravatar.cc/150?img=31">
-
-<div class="mic">
-
-🎤
-
-</div>
-
-<span>
-
-Can
-
-</span>
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-<div class="seat empty">
-
-+
-
-</div>
-
-</section>
-
-<section id="chatArea">
 
 <div class="chatItem">
 
 <b>EyLive</b>
 
-Hoş Geldiniz ❤️
+Herkese iyi sohbetler ❤️
 
 </div>
-
-<div class="chatItem">
-
-<b>Ahmet</b>
-
-İyi yayınlar 🎉
-
-</div>
-
-<div class="chatItem">
-
-<b>Ayşe</b>
-
-Merhaba 👋
 
 </div>
 
@@ -258,9 +183,9 @@ Merhaba 👋
 
 </button>
 
-<button id="chatBtn">
+<button id="profileBtn">
 
-💬
+👤
 
 </button>
 
@@ -268,6 +193,9 @@ Merhaba 👋
 
 </div>
 
+<script src="../js/app.js"></script>
+<script src="../js/gift.js"></script>
+<script src="../js/profile.js"></script>
 <script src="../js/room.js"></script>
 
 </body>
