@@ -4,24 +4,18 @@ const APP = {
     build: "004"
 };
 
-class EyLive {
+console.log("APP BAŞLADI");
 
-    constructor() {
-        this.init();
-    }
+window.onload = function () {
 
-    init() {
-        console.log(APP);
+    const splash = document.getElementById("splash");
+    const login = document.getElementById("loginPage");
 
-        setTimeout(() => {
+    setTimeout(() => {
 
-            document.getElementById("splash").style.display = "none";
-            document.getElementById("loginPage").style.display = "flex";
+        splash.style.display = "none";
+        login.style.display = "flex";
 
-        }, 2200);
+    }, 2200);
 
-    }
-
-}
-
-new EyLive();
+};
