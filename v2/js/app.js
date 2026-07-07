@@ -49,8 +49,7 @@ class EyLive {
 
         setTimeout(() => {
 
-            const nextPage = "./pages/home.html";
-
+            const nextPage = "./pages/index.html";
             fetch(nextPage)
                 .then(res => {
 
