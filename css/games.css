@@ -1,0 +1,151 @@
+/* ==========================================
+        EY LIVE GAMES STYLE v1.0
+========================================== */
+
+.gamesPage{
+min-height:100vh;
+background:linear-gradient(180deg,#12001f,#22003d,#330066);
+color:#fff;
+padding-bottom:90px;
+font-family:Poppins,sans-serif;
+}
+
+.gamesHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+position:sticky;
+top:0;
+z-index:10;
+}
+
+.gamesHeader h2{
+font-size:22px;
+}
+
+.coinBox{
+background:linear-gradient(135deg,#ffb300,#ff7b00);
+padding:10px 18px;
+border-radius:25px;
+font-weight:bold;
+color:#fff;
+}
+
+.dailyReward{
+margin:20px;
+padding:20px;
+border-radius:25px;
+background:linear-gradient(135deg,#8a2eff,#ff2ebd);
+box-shadow:0 10px 25px rgba(138,46,255,.4);
+}
+
+.dailyReward h3{
+margin-bottom:10px;
+}
+
+.dailyReward p{
+opacity:.9;
+margin-bottom:18px;
+}
+
+.dailyReward button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:18px;
+background:#fff;
+color:#8a2eff;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.gameGrid{
+padding:20px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+}
+
+.gameCard{
+background:rgba(255,255,255,.08);
+border-radius:25px;
+padding:20px;
+text-align:center;
+backdrop-filter:blur(20px);
+transition:.3s;
+}
+
+.gameCard:hover{
+transform:translateY(-5px);
+}
+
+.gameCard .icon{
+font-size:50px;
+margin-bottom:15px;
+}
+
+.gameCard h3{
+font-size:18px;
+margin-bottom:6px;
+}
+
+.gameCard p{
+font-size:13px;
+opacity:.7;
+margin-bottom:18px;
+}
+
+.gameCard button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:15px;
+background:linear-gradient(135deg,#8a2eff,#ff2ebd);
+color:white;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+}
+
+.bottomNav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:75px;
+display:flex;
+justify-content:space-around;
+align-items:center;
+background:rgba(18,0,31,.95);
+backdrop-filter:blur(20px);
+border-top:1px solid rgba(255,255,255,.08);
+}
+
+.bottomNav div{
+text-align:center;
+cursor:pointer;
+transition:.3s;
+}
+
+.bottomNav div:hover{
+color:#ff2ebd;
+}
+
+.bottomNav p{
+font-size:12px;
+margin-top:4px;
+}
+
+@media(max-width:600px){
+
+.gameGrid{
+
+grid-template-columns:1fr;
+
+}
+
+}
