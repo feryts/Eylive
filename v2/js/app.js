@@ -83,8 +83,7 @@ if(!bar) return;
 
 setTimeout(()=>{
 
-window.location.href="pages/home.html";
-
+window.location.href = "pages/index.html";
 },2200);
 
 }
