@@ -344,3 +344,131 @@ border:1px solid rgba(255,255,255,.05);
 display:none;
 
 }
+#bg-animation{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(180deg,#0b0618,#180a2f,#241044);
+z-index:-1;
+}
+
+#splash{
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.logoBox{
+text-align:center;
+}
+
+.logoCircle{
+width:120px;
+height:120px;
+border-radius:50%;
+background:linear-gradient(135deg,#7B2EFF,#FF2E9E);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:60px;
+margin:auto;
+box-shadow:0 0 45px rgba(123,46,255,.45);
+}
+
+.loader{
+display:flex;
+justify-content:center;
+gap:12px;
+margin-top:25px;
+}
+
+.loader div{
+width:14px;
+height:14px;
+border-radius:50%;
+background:#fff;
+animation:dot 1s infinite;
+}
+
+.loader div:nth-child(2){
+animation-delay:.2s;
+}
+
+.loader div:nth-child(3){
+animation-delay:.4s;
+}
+
+@keyframes dot{
+0%,100%{
+opacity:.3;
+transform:scale(.8);
+}
+50%{
+opacity:1;
+transform:scale(1.2);
+}
+}
+
+#loginPage{
+display:none;
+justify-content:center;
+align-items:center;
+height:100vh;
+padding:25px;
+}
+
+.loginCard{
+width:100%;
+max-width:420px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(20px);
+padding:30px;
+border-radius:25px;
+}
+
+.loginCard h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.loginCard p{
+margin-bottom:25px;
+color:#ccc;
+}
+
+.loginCard input{
+width:100%;
+padding:16px;
+margin-bottom:15px;
+border-radius:16px;
+background:#ffffff10;
+color:#fff;
+}
+
+.loginCard button{
+width:100%;
+padding:16px;
+margin-top:12px;
+border-radius:16px;
+font-size:18px;
+}
+
+.loginBtn{
+background:linear-gradient(135deg,#7B2EFF,#FF2E9E);
+color:#fff;
+}
+
+.registerBtn{
+background:#ffffff20;
+color:#fff;
+}
+
+.guestBtn{
+background:transparent;
+border:1px solid #ffffff33;
+color:#fff;
+}
