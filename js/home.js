@@ -1,123 +1,146 @@
 /* ===========================================
-   EY LIVE HOME.JS v1.0
+        EY LIVE V2
+        HOME SYSTEM
 =========================================== */
 
+const roomList = document.getElementById("roomList");
+const vipList = document.getElementById("vipList");
+
 const rooms = [
+
 {
-icon:"🎤",
-name:"Türkiye Sohbet",
-desc:"Genel Eğlence",
-users:18
+id:1001,
+name:"Türkiye Lounge",
+host:"EyLive",
+online:245,
+emoji:"🎙"
 },
+
 {
-icon:"🎵",
-name:"Music Party",
-desc:"DJ Canlı Yayın",
-users:25
+id:1002,
+name:"Gece Sohbeti",
+host:"Ahmet",
+online:132,
+emoji:"🌙"
 },
+
 {
-icon:"🎮",
-name:"Game Club",
-desc:"Slot Oyuncuları",
-users:14
+id:1003,
+name:"Müzik Odası",
+host:"DJ Emre",
+online:98,
+emoji:"🎵"
 },
+
 {
-icon:"💎",
-name:"VIP Lounge",
-desc:"Özel Oda",
-users:7
-},
-{
-icon:"😂",
-name:"Komedi",
-desc:"Eğlence",
-users:20
-},
-{
-icon:"☕",
-name:"Cafe",
-desc:"Muhabbet",
-users:11
-},
-{
-icon:"🎧",
-name:"Gece FM",
-desc:"Müzik",
-users:36
-},
-{
-icon:"❤️",
-name:"Aşk Odası",
-desc:"Tanışma",
-users:22
+id:1004,
+name:"VIP Club",
+host:"Queen",
+online:64,
+emoji:"👑"
 }
+
 ];
 
-const streamers=[
+const vipUsers=[
+
+{
+name:"EyLive",
+level:15,
+avatar:"../assets/avatar/default.png"
+},
+
 {
 name:"Elif",
-id:"EY100245",
-img:"https://i.pravatar.cc/150?img=12"
+level:12,
+avatar:"../assets/avatar/default.png"
 },
+
 {
 name:"Ahmet",
-id:"EY100533",
-img:"https://i.pravatar.cc/150?img=32"
+level:10,
+avatar:"../assets/avatar/default.png"
 },
+
 {
-name:"Ayşe",
-id:"EY100811",
-img:"https://i.pravatar.cc/150?img=42"
-},
-{
-name:"Mehmet",
-id:"EY100925",
-img:"https://i.pravatar.cc/150?img=52"
-},
-{
-name:"Zeynep",
-id:"EY101024",
-img:"https://i.pravatar.cc/150?img=18"
+name:"Merve",
+level:9,
+avatar:"../assets/avatar/default.png"
 }
+
 ];
 
-const roomArea=document.getElementById("rooms");
+function renderRooms(){
+
+roomList.innerHTML="";
 
 rooms.forEach(room=>{
 
-roomArea.innerHTML+=`
+roomList.innerHTML+=`
 
 <div class="roomCard">
 
-<div class="roomLeft">
+<div class="roomImage">
 
-<div class="roomIcon">
-
-${room.icon}
+${room.emoji}
 
 </div>
 
-<div>
+<div class="roomInfo">
 
-<div class="roomName">
+<h4>${room.name}</h4>
 
-${room.name}
+<p>
+
+👤 ${room.host}
+
+</p>
+
+<p>
+
+👥 ${room.online} Online
+
+</p>
+
+<div class="onlineBadge">
+
+Katıl
 
 </div>
 
-<div class="roomDesc">
-
-${room.desc}
-
 </div>
 
 </div>
 
-</div>
+`;
 
-<div class="roomUsers">
+});
 
-👥 ${room.users}
+}
+
+function renderVip(){
+
+vipList.innerHTML="";
+
+vipUsers.forEach(user=>{
+
+vipList.innerHTML+=`
+
+<div class="vipCard">
+
+<img src="${user.avatar}">
+
+<h4>${user.name}</h4>
+
+<p>
+
+VIP ${user.level}
+
+</p>
+
+<div class="onlineBadge">
+
+Online
 
 </div>
 
@@ -127,144 +150,50 @@ ${room.desc}
 
 });
 
-const streamerArea=document.getElementById("streamers");
+}
 
-streamers.forEach(user=>{
+function loadWallet(){
 
-streamerArea.innerHTML+=`
+let data=JSON.parse(
 
-<div class="streamCard">
+localStorage.getItem("eylive_user")
 
-<div class="live"></div>
+);
 
-<img src="${user.img}">
+if(!data){
 
-<h3>${user.name}</h3>
-
-<p>${user.id}</p>
-
-</div>
-
-`;
-
-});
-
-document.querySelectorAll(".roomCard").forEach(card=>{
-
-card.onclick=function(){
-
-this.animate([
-
-{
-
-transform:"scale(.95)"
-
-},
-
-{
-
-transform:"scale(1.03)"
-
-},
-
-{
-
-transform:"scale(1)"
+return;
 
 }
 
-],{
+document.getElementById("coinText").innerHTML=data.coin;
 
-duration:300
+document.getElementById("diamondText").innerHTML=data.diamond;
 
-});
+}
 
-alert("Sesli oda ekranı sonraki pakette eklenecek.");
+renderRooms();
+
+renderVip();
+
+loadWallet();
+
+document.querySelectorAll(".roomCard").forEach((card,index)=>{
+
+card.onclick=()=>{
+
+localStorage.setItem(
+
+"selectedRoom",
+
+JSON.stringify(rooms[index])
+
+);
+
+location.href="room.html";
 
 }
 
 });
 
-document.querySelectorAll(".streamCard").forEach(card=>{
-
-card.onclick=function(){
-
-this.animate([
-
-{
-
-transform:"rotate(-3deg)"
-
-},
-
-{
-
-transform:"rotate(3deg)"
-
-},
-
-{
-
-transform:"rotate(0deg)"
-
-}
-
-],{
-
-duration:350
-
-});
-
-}
-
-});
-
-const search=document.querySelector(".searchBox input");
-
-search.addEventListener("keyup",()=>{
-
-const value=search.value.toLowerCase();
-
-document.querySelectorAll(".roomCard").forEach(card=>{
-
-const text=card.innerText.toLowerCase();
-
-card.style.display=text.includes(value)?"flex":"none";
-
-});
-
-});
-
-document.querySelectorAll(".bottomNav div").forEach(item=>{
-
-item.onclick=function(){
-
-document.querySelectorAll(".bottomNav div").forEach(x=>{
-
-x.style.color="#fff";
-
-});
-
-this.style.color="#ff2ebd";
-
-}
-
-});
-
-setInterval(()=>{
-
-document.querySelectorAll(".roomUsers").forEach(user=>{
-
-let number=parseInt(user.innerText.replace(/\D/g,""));
-
-number+=Math.floor(Math.random()*3)-1;
-
-if(number<1)number=1;
-
-user.innerHTML="👥 "+number;
-
-});
-
-},5000);
-
-console.log("EY LIVE HOME LOADED");
+console.log("HOME READY");

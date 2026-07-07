@@ -1,165 +1,220 @@
 /* ==========================================
-        EY LIVE GAMES.JS v1.0
+   EY LIVE V2
+   GAMES ENGINE
 ========================================== */
 
-let coin = Number(localStorage.getItem("coin")) || 125000;
+const Games={
 
-const coinText = document.getElementById("coin");
-coinText.innerHTML = coin;
+bet:100,
 
-const dailyBtn = document.getElementById("dailyBtn");
-const slotBtn = document.querySelector("#slotGame button");
-const wheelBtn = document.querySelector("#wheelGame button");
+user:null,
 
-/* Günlük Ödül */
+init(){
 
-dailyBtn.onclick = () => {
+this.loadUser();
 
-    coin += 500;
+this.events();
 
-    saveCoin();
+console.log("Games Ready");
 
-    toast("+500 Coin Kazandın 🎉");
+},
 
-    dailyBtn.disabled = true;
-    dailyBtn.innerHTML = "Alındı ✓";
+loadUser(){
 
-}
+this.user=Storage.load("eylive_user");
 
-/* SLOT */
+if(!this.user){
 
-slotBtn.onclick = () => {
+this.user={
 
-    if (coin < 100) {
+coin:1000,
 
-        toast("Yetersiz Coin");
+diamond:100
 
-        return;
+};
 
-    }
-
-    coin -= 100;
-
-    const symbols = ["🍒", "🍋", "💎", "7️⃣", "⭐", "🍀"];
-
-    let a = symbols[Math.floor(Math.random() * symbols.length)];
-    let b = symbols[Math.floor(Math.random() * symbols.length)];
-    let c = symbols[Math.floor(Math.random() * symbols.length)];
-
-    let result = a + " " + b + " " + c;
-
-    if (a == b && b == c) {
-
-        coin += 5000;
-
-        alert(result + "\n\n🎉 JACKPOT\n+5000 Coin");
-
-    } else if (a == b || b == c || a == c) {
-
-        coin += 500;
-
-        alert(result + "\n\n👏 Tebrikler\n+500 Coin");
-
-    } else {
-
-        alert(result + "\n\nTekrar Dene");
-
-    }
-
-    saveCoin();
+Storage.save("eylive_user",this.user);
 
 }
 
-/* Lucky Wheel */
+},
 
-wheelBtn.onclick = () => {
+save(){
 
-    if (coin < 50) {
+Storage.save("eylive_user",this.user);
 
-        toast("Yetersiz Coin");
+},
 
-        return;
+events(){
 
-    }
+document.querySelectorAll(".gameCard").forEach(card=>{
 
-    coin -= 50;
+card.onclick=()=>{
 
-    const rewards = [
+const game=card.dataset.game;
 
-        0,
+this.play(game);
 
-        20,
+};
 
-        50,
+});
 
-        100,
+},
 
-        300,
+play(game){
 
-        500,
+switch(game){
 
-        1000,
+case "wheel":
 
-        5000
+this.luckyWheel();
 
-    ];
+break;
 
-    const reward = rewards[Math.floor(Math.random() * rewards.length)];
+case "slot":
 
-    coin += reward;
+this.slot();
 
-    saveCoin();
+break;
 
-    alert("🎡\n\nKazandığın Ödül\n\n+" + reward + " Coin");
+case "dice":
 
-}
+this.dice();
 
-/* Coin */
+break;
 
-function saveCoin() {
+case "box":
 
-    localStorage.setItem("coin", coin);
+this.luckyBox();
 
-    coinText.innerHTML = coin;
+break;
 
-}
+case "jackpot":
 
-/* Toast */
+this.jackpot();
 
-function toast(text) {
+break;
 
-    const div = document.createElement("div");
+default:
 
-    div.innerHTML = text;
-
-    div.style.position = "fixed";
-
-    div.style.left = "50%";
-
-    div.style.bottom = "100px";
-
-    div.style.transform = "translateX(-50%)";
-
-    div.style.background = "#8a2eff";
-
-    div.style.padding = "15px 25px";
-
-    div.style.borderRadius = "30px";
-
-    div.style.color = "#fff";
-
-    div.style.boxShadow = "0 0 25px #8a2eff";
-
-    div.style.zIndex = "9999";
-
-    document.body.appendChild(div);
-
-    setTimeout(() => {
-
-        div.remove();
-
-    }, 1800);
+alert("Yakında");
 
 }
 
-console.log("EY LIVE GAMES READY");
+},
+
+checkCoin(){
+
+if(this.user.coin<this.bet){
+
+alert("Yetersiz Coin");
+
+return false;
+
+}
+
+return true;
+
+},
+
+reward(min,max){
+
+const win=Math.floor(Math.random()*(max-min+1))+min;
+
+this.user.coin+=win;
+
+this.save();
+
+alert("Kazandın : "+win+" Coin");
+
+},
+
+lose(){
+
+this.user.coin-=this.bet;
+
+if(this.user.coin<0){
+
+this.user.coin=0;
+
+}
+
+this.save();
+
+alert("Kaybettin : "+this.bet+" Coin");
+
+},
+
+slot(){
+
+if(!this.checkCoin()) return;
+
+Math.random()>0.55 ?
+
+this.reward(150,600):
+
+this.lose();
+
+},
+
+dice(){
+
+if(!this.checkCoin()) return;
+
+const dice=Math.floor(Math.random()*6)+1;
+
+if(dice>=4){
+
+this.reward(100,400);
+
+}else{
+
+this.lose();
+
+}
+
+},
+
+luckyWheel(){
+
+if(!this.checkCoin()) return;
+
+Math.random()>0.50 ?
+
+this.reward(200,1200):
+
+this.lose();
+
+},
+
+luckyBox(){
+
+if(!this.checkCoin()) return;
+
+Math.random()>0.60 ?
+
+this.reward(300,1500):
+
+this.lose();
+
+},
+
+jackpot(){
+
+if(!this.checkCoin()) return;
+
+Math.random()>0.90 ?
+
+this.reward(5000,20000):
+
+this.lose();
+
+}
+
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+Games.init();
+
+});

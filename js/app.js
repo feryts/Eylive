@@ -1,172 +1,167 @@
 /* ===========================================
-   EY LIVE
-   CORE APP
+   EY LIVE V2 CORE
+   app.js
 =========================================== */
 
 const APP = {
-
     name: "EY LIVE",
-
-    version: "3.0.0",
-
-    build: "100",
-
-    theme: "dark"
-
+    version: "2.0.0",
+    build: "002",
+    theme: "dark",
+    online: true
 };
 
 const DEFAULT_USER = {
-
-    id: "EY100001",
-
-    username: "Misafir",
-
+    id: "",
+    username: "",
     avatar: "assets/avatar/default.png",
-
-    coin: 500,
-
-    diamond: 50,
-
+    coin: 0,
+    diamond: 0,
     level: 1,
-
     vip: 0,
-
     verified: false,
-
     role: "guest",
-
     language: "tr",
-
     theme: "dark"
-
 };
 
 class EyLive {
 
-    constructor(){
-
-        this.user=this.loadUser();
-
+    constructor() {
+        this.user = this.loadUser();
         this.init();
-
     }
 
-    init(){
-
-        console.log(
-
-            APP.name,
-
-            APP.version,
-
-            APP.build
-
-        );
-
-        this.theme();
-
-        this.network();
+    init() {
+        console.log(APP.name, APP.version, APP.build);
 
         this.install();
-
+        this.network();
+        this.theme();
         this.loader();
+    }
+
+    loader() {
+
+        const bar = document.querySelector(".bar");
+
+        if (!bar) return;
+
+        setTimeout(() => {
+
+            const nextPage = "./pages/index.html";
+            fetch(nextPage)
+                .then(res => {
+
+                    if (res.ok) {
+
+                        window.location.replace(nextPage);
+
+                    } else {
+
+                        document.body.innerHTML = `
+                            <div style="
+                                background:#12061f;
+                                color:#fff;
+                                height:100vh;
+                                display:flex;
+                                justify-content:center;
+                                align-items:center;
+                                flex-direction:column;
+                                font-family:Poppins,sans-serif;
+                                text-align:center;
+                                padding:20px;
+                            ">
+                                <h2>Sayfa bulunamadı</h2>
+                                <p>${nextPage}</p>
+                                <p>Status : ${res.status}</p>
+                            </div>
+                        `;
+
+                    }
+
+                })
+                .catch(err => {
+
+                    document.body.innerHTML = `
+                        <div style="
+                            background:#12061f;
+                            color:#fff;
+                            height:100vh;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                            flex-direction:column;
+                            font-family:Poppins,sans-serif;
+                            text-align:center;
+                            padding:20px;
+                        ">
+                            <h2>Yükleme Hatası</h2>
+                            <p>${err}</p>
+                        </div>
+                    `;
+
+                });
+
+        }, 2200);
 
     }
 
-    loader(){
+    loadUser() {
 
-        const loader=document.getElementById("loader");
+        const data = localStorage.getItem("eylive_user");
 
-        if(!loader) return;
-
-        setTimeout(()=>{
-
-            location.href="home.html";
-
-        },2200);
-
-    }
-
-    loadUser(){
-
-        const data=localStorage.getItem("eylive_user");
-
-        if(data){
-
+        if (data) {
             return JSON.parse(data);
-
         }
 
         localStorage.setItem(
-
             "eylive_user",
-
             JSON.stringify(DEFAULT_USER)
-
         );
 
         return DEFAULT_USER;
 
     }
 
-    saveUser(){
+    saveUser() {
 
         localStorage.setItem(
-
             "eylive_user",
-
             JSON.stringify(this.user)
-
         );
 
     }
 
-    theme(){
+    network() {
 
-        document.body.setAttribute(
-
-            "data-theme",
-
-            this.user.theme
-
-        );
-
-    }
-
-    network(){
-
-        window.addEventListener("offline",()=>{
+        window.addEventListener("offline", () => {
 
             alert("İnternet bağlantısı kesildi.");
 
         });
 
-        window.addEventListener("online",()=>{
+    }
 
-            console.log("Bağlantı geri geldi.");
+    theme() {
+
+        document.body.dataset.theme = this.user.theme;
+
+    }
+
+    install() {
+
+        window.addEventListener("beforeinstallprompt", e => {
+
+            e.preventDefault();
+            window.installPrompt = e;
 
         });
 
     }
 
-    install(){
-
-        window.addEventListener(
-
-            "beforeinstallprompt",
-
-            e=>{
-
-                e.preventDefault();
-
-                window.installPrompt=e;
-
-            }
-
-        );
-
-    }
-
 }
 
-window.ey=new EyLive();
+const ey = new EyLive();
+
+window.ey = ey;

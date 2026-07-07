@@ -1,211 +1,169 @@
 /* ==========================================
-        EY LIVE ROOM.JS v1.0
+   EY LIVE V2
+   ROOM ENGINE 1.0
 ========================================== */
 
-const micBtn=document.getElementById("micBtn");
-const giftBtn=document.getElementById("giftBtn");
-const emojiBtn=document.getElementById("emojiBtn");
-const chatBtn=document.getElementById("chatBtn");
-const backBtn=document.getElementById("backBtn");
+const ROOM = {
+    id: 1001,
+    name: "Türkiye Lounge",
+    online: 245,
+    host: "EyLive"
+};
 
-let micOpen=false;
+const roomTitle = document.getElementById("roomTitle");
+const roomId = document.getElementById("roomId");
+const onlineCount = document.getElementById("onlineCount");
+const chatList = document.getElementById("chatList");
 
-/* Mikrofon */
+if (roomTitle) roomTitle.textContent = ROOM.name;
+if (roomId) roomId.textContent = "ID " + ROOM.id;
+if (onlineCount) onlineCount.textContent = ROOM.online + " Online";
 
-micBtn.onclick=()=>{
-
-micOpen=!micOpen;
-
-if(micOpen){
-
-micBtn.classList.add("mic-active");
-
-micBtn.innerHTML="🔊";
-
-showToast("Mikrofon Açıldı");
-
-}else{
-
-micBtn.classList.remove("mic-active");
-
-micBtn.innerHTML="🎤";
-
-showToast("Mikrofon Kapandı");
-
-}
-
-}
-
-/* Geri */
-
-backBtn.onclick=()=>{
-
-window.location.href="home.html";
-
-}
-
-/* Hediye */
-
-giftBtn.onclick=()=>{
-
-openGiftPanel();
-
-}
-
-/* Emoji */
-
-emojiBtn.onclick=()=>{
-
-openEmojiPanel();
-
-}
-
-/* Mesaj */
-
-chatBtn.onclick=()=>{
-
-let mesaj=prompt("Mesajınızı Yaz");
-
-if(mesaj){
-
-sendMessage("Sen",mesaj);
-
-}
-
-}
-
-/* Sohbet */
-
-function sendMessage(name,text){
-
-const chat=document.querySelector(".chatBox");
-
-const div=document.createElement("div");
-
-div.className="message";
-
-div.innerHTML="<b>"+name+"</b><br>"+text;
-
-chat.appendChild(div);
-
-chat.scrollTop=chat.scrollHeight;
-
-}
-
-/* Emoji Paneli */
-
-function openEmojiPanel(){
-
-const emojis=[
-
-"😀","😂","😍","🥰","😎","🔥",
-
-"❤️","👏","🎉","👍","🎁","💎"
-
+const messages = [
+    {
+        user: "Sistem",
+        text: "🎉 Odaya hoş geldiniz."
+    },
+    {
+        user: "EyLive",
+        text: "❤️ Herkese iyi eğlenceler."
+    }
 ];
 
-let html="";
+function renderChat() {
 
-emojis.forEach(e=>{
+    if (!chatList) return;
 
-html+=e+" ";
+    chatList.innerHTML = "";
 
-});
+    messages.forEach(item => {
 
-alert(html);
+        chatList.innerHTML += `
+        <div class="chatItem">
+            <b>${item.user}</b>
+            ${item.text}
+        </div>
+        `;
 
-}
+    });
 
-/* Hediye */
-
-function openGiftPanel(){
-
-const gifts=[
-
-"🌹 Gül",
-
-"💍 Yüzük",
-
-"🚗 Araba",
-
-"🛥 Yat",
-
-"🏰 Kale",
-
-"👑 Taç",
-
-"💎 Elmas",
-
-"✈️ Jet"
-
-];
-
-let text="Gönderilecek Hediyeler\n\n";
-
-gifts.forEach((g,i)=>{
-
-text+=(i+1)+". "+g+"\n";
-
-});
-
-alert(text);
+    chatList.scrollTop = chatList.scrollHeight;
 
 }
 
-/* Toast */
+renderChat();
 
-function showToast(text){
+function systemMessage(text){
 
-const div=document.createElement("div");
+    messages.push({
+        user:"Sistem",
+        text:text
+    });
 
-div.innerHTML=text;
-
-div.style.position="fixed";
-
-div.style.bottom="95px";
-
-div.style.left="50%";
-
-div.style.transform="translateX(-50%)";
-
-div.style.background="#8a2eff";
-
-div.style.padding="12px 20px";
-
-div.style.borderRadius="30px";
-
-div.style.color="#fff";
-
-div.style.zIndex="999";
-
-div.style.boxShadow="0 0 20px #8a2eff";
-
-document.body.appendChild(div);
-
-setTimeout(()=>{
-
-div.remove();
-
-},1800);
+    renderChat();
 
 }
 
-/* Konuşma Animasyonu */
+document.getElementById("backBtn").onclick = () => {
+
+    history.back();
+
+};
+
+document.getElementById("heartBtn").onclick = () => {
+
+    createHeart();
+
+};
+
+document.getElementById("emojiBtn").onclick = () => {
+
+    messages.push({
+
+        user:"Sen",
+
+        text:"😀😀😀"
+
+    });
+
+    renderChat();
+
+};
+
+document.getElementById("giftBtn").onclick = () => {
+
+    if(typeof openGiftPanel==="function"){
+
+        openGiftPanel();
+
+    }
+
+};
+
+document.getElementById("profileBtn").onclick = () => {
+
+    if(typeof openProfile==="function"){
+
+        openProfile();
+
+    }
+
+};
+
+document.getElementById("micBtn").onclick = () => {
+
+    systemMessage("🎤 Mikrofon isteği gönderildi.");
+
+};
+
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.innerHTML="❤️";
+
+    heart.style.position="fixed";
+
+    heart.style.bottom="90px";
+
+    heart.style.left=(Math.random()*70+15)+"%";
+
+    heart.style.fontSize="32px";
+
+    heart.style.zIndex="9999";
+
+    heart.style.transition="2s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+
+        heart.style.transform="translateY(-300px) scale(2)";
+
+        heart.style.opacity="0";
+
+    },50);
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },2100);
+
+}
 
 setInterval(()=>{
 
-const users=document.querySelectorAll(".seat img");
+    ROOM.online += Math.floor(Math.random()*3)-1;
 
-const random=Math.floor(Math.random()*users.length);
+    if(ROOM.online<1){
 
-users.forEach(x=>{
+        ROOM.online=1;
 
-x.style.boxShadow="none";
+    }
 
-});
+    onlineCount.textContent=ROOM.online+" Online";
 
-users[random].style.boxShadow="0 0 25px #00ff88";
+},8000);
 
-},2000);
-
-console.log("ROOM READY");
+console.log("EY LIVE ROOM READY");
