@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://eyliveapp.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://eyliveapp.vercel.app/:path*",
+      "permanent": false
+    }
+  ]
+}
