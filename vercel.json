@@ -4,32 +4,32 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "https://eylive-app.vercel.app/",
+      "destination": "https://eyliveapp.vercel.app/",
       "permanent": false
     },
     {
       "source": "/v2/",
-      "destination": "https://eylive-app.vercel.app/",
+      "destination": "https://eyliveapp.vercel.app/",
       "permanent": false
     },
     {
       "source": "/admin/",
-      "destination": "https://eylive-app.vercel.app/",
+      "destination": "https://eyliveapp.vercel.app/",
       "permanent": false
     },
     {
       "source": "/v2/:path*",
-      "destination": "https://eylive-app.vercel.app/:path*",
+      "destination": "https://eyliveapp.vercel.app/:path*",
       "permanent": false
     },
     {
       "source": "/admin/:path*",
-      "destination": "https://eylive-app.vercel.app/:path*",
+      "destination": "https://eyliveapp.vercel.app/:path*",
       "permanent": false
     },
     {
       "source": "/:path*",
-      "destination": "https://eylive-app.vercel.app/:path*",
+      "destination": "https://eyliveapp.vercel.app/:path*",
       "permanent": false
     }
   ],
