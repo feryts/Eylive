@@ -1,21 +1,9 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "headers": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache"
-        }
-      ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
+      "source": "/:path*",
+      "destination": "https://eylive-app.vercel.app/:path*",
+      "permanent": false
     }
   ]
 }
