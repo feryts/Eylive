@@ -2,12 +2,12 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "https://eyliveapp.vercel.app/",
+      "destination": "https://eylive-app.vercel.app/",
       "permanent": false
     },
     {
       "source": "/:path*",
-      "destination": "https://eyliveapp.vercel.app/:path*",
+      "destination": "https://eylive-app.vercel.app/:path*",
       "permanent": false
     }
   ]
