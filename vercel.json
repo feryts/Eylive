@@ -1,9 +1,35 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "destination": "https://eylive-app.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/v2/:path*",
+      "destination": "https://eylive-app.vercel.app/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "https://eylive-app.vercel.app/:path*",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
       "destination": "https://eylive-app.vercel.app/:path*",
       "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
     }
   ]
 }
