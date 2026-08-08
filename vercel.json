@@ -1,7 +1,19 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/",
+      "destination": "https://eylive-app.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/v2/",
+      "destination": "https://eylive-app.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/admin/",
       "destination": "https://eylive-app.vercel.app/",
       "permanent": false
     },
